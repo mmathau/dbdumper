@@ -130,7 +130,7 @@ dump_container_database() {
 
 rotate_backups() {
     # Delete backups older than 7 days
-    mapfile -t results < <(find "${1}" -maxdepth 1 -type f -name '*.sql' -mtime +7 -delete) #TODO: test if this really works
+    mapfile -t results < <(find "${1}" -maxdepth 1 -type f -name '*.sql' -mtime +7 -print -delete)
 
     if ((${#results[@]})); then
         printf "rotated backup '%s'\n" "${results[@]##*/}"
