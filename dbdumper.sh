@@ -17,7 +17,7 @@ set -o nounset  # abort on unbound variable
 set -o pipefail # dont hide errors within pipes
 
 readonly DOCKER="/usr/bin/docker"
-readonly CONTAINER_NAMES=("kodi-db" "bookstack-db" "nextcloud-db" "paperless-db")
+readonly CONTAINER_NAMES=("container1-db" "container2-db" "container3-db")
 
 container_exists() {
     printf '%s' "$(${DOCKER} ps -q -f name="${1}")"
