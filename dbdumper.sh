@@ -1,7 +1,7 @@
 #!/bin/bash
 #
 # name: dbdumper
-# version: 1.0.0
+# version: 1.0.1
 # license: GPL v3+
 # bash script to dump mysql and postgres databases hosted in docker containers
 # reading credentials and mount points from containers by using docker inspect
@@ -85,7 +85,7 @@ dump_database() {
     esac
 
     # https://stackoverflow.com/a/41080205
-    $DOCKER exec --tty --interactive "${container}" sh -c "$cmd; exit $?"
+    $DOCKER exec --tty "${container}" sh -c "$cmd; exit $?"
 
     if [[ $? -eq 0 ]]; then
         printf "created backup '%s'\n" "${output}"
@@ -129,8 +129,8 @@ dump_container_database() {
 }
 
 rotate_backups() {
-    # Delete backups older than 7 days
-    mapfile -t results < <(find "${1}" -maxdepth 1 -type f -name '*.sql' -mtime +7 -print -delete)
+    # Delete backups older than 14 days
+    mapfile -t results < <(find "${1}" -maxdepth 1 -type f -name '*.sql' -mtime +14 -print -delete)
 
     if ((${#results[@]})); then
         printf "rotated backup '%s'\n" "${results[@]##*/}"
