@@ -6,11 +6,8 @@
 # bash script to dump mysql and postgres databases hosted in docker containers
 # reading credentials and mount points from containers by using docker inspect
 #
-# this script assumes that:
-# 1. all your containers use environment variables containing
-# authorization credentials required to perform the database dump.
-# 2. your containers are created using a mount point named /backup where backups are stored
-# which can be mapped to any folder on the host.
+# this script assumes that your containers are created using a mount point
+# named /backup where backups are to be stored, which can be mapped to any folder on the host.
 
 set -o errexit  # abort on nonzero exitstatus
 set -o nounset  # abort on unbound variable
